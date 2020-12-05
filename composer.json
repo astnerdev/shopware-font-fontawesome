@@ -1,18 +1,28 @@
 {
-  "name": "swag/plugin-skeleton",
-  "description": "Skeleton plugin",
-  "type": "shopware-platform-plugin",
-  "license": "MIT",
-  "autoload": {
-    "psr-4": {
-      "MastoxFontAwesome\\": "src/"
+    "name": "mastox/shopware-font-fontawesome",
+    "description": "Add Font Awesome to Shopware 6",
+    "version": "v0.0.1",
+    "type": "shopware-platform-plugin",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Christoph Astner",
+            "email": "mastox@live.de"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "MastoxFontAwesome\\": "src/"
+        }
+    },
+    "extra": {
+        "shopware-plugin-class": "MastoxFontAwesome\\MastoxFontAwesome",
+        "label": {
+            "de-DE": "Font Awesome",
+            "en-GB": "Font Awesome"
+        }
+    },
+    "require": {
+        "shopware/core": "6.1.*"
     }
-  },
-  "extra": {
-    "shopware-plugin-class": "MastoxFontAwesome\\MastoxFontAwesome",
-    "label": {
-      "de-DE": "Skeleton plugin",
-      "en-GB": "Skeleton plugin"
-    }
-  }
 }
