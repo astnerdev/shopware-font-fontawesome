@@ -1,29 +1,29 @@
 {
-    "name": "mastox/shopware-font-fontawesome",
+    "name": "astnerdev/shopware-font-fontawesome",
     "description": "Add Font Awesome to Shopware 6",
-    "version": "v0.0.1",
+    "version": "1.0.0",
     "type": "shopware-platform-plugin",
     "license": "MIT",
     "authors": [
         {
             "name": "Christoph Astner",
-            "email": "mastox@live.de"
+            "email": "astnerdev@live.de"
         }
     ],
     "autoload": {
         "psr-4": {
-            "MastoxFontAwesome\\": "src/"
+            "AstnerdevFontAwesome\\": "src/"
         }
     },
     "extra": {
-        "shopware-plugin-class": "MastoxFontAwesome\\MastoxFontAwesome",
+        "shopware-plugin-class": "AstnerdevFontAwesome\\AstnerdevFontAwesome",
         "label": {
             "de-DE": "Font Awesome",
             "en-GB": "Font Awesome"
         }
     },
     "require": {
-        "shopware/core": "6.1.*|6.2.*|6.3.*",
-        "shopware/storefront": "6.1.*|6.2.*|6.3.*"
+        "shopware/core": "^6.7",
+        "shopware/storefront": "^6.7"
     }
 }
