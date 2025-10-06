@@ -40,11 +40,11 @@ jobs:
 
       - name: Run unit tests
         run: |
-          docker exec --user www-data dockware bash -lc 'cd /var/www/html && ./psh.phar unit'
+          docker exec --user www-data dockware bash -lc 'cd /var/www/html && ./vendor/bin/phpunit --configuration="custom/plugins/AstnerdevFontAwesome/phpunit.xml.dist"'
 
       - name: Run storefront tests
         run: |
-          docker exec --user www-data dockware bash -lc 'cd /var/www/html && ./psh.phar storefront:unit'
+          docker exec --user www-data dockware bash -lc 'cd /var/www/html && ./vendor/bin/phpunit --configuration="vendor/shopware/platform/src/Storefront/Test/phpunit.xml"'
 
       - name: Show Dockware logs on failure
         if: failure()

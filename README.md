@@ -17,9 +17,16 @@ font files. After activating the plugin, run the storefront build
 
 Every push and pull request triggers a GitHub Actions workflow that boots a
 Dockware Shopware 6.7.2.2 environment, installs the plugin, and executes the
-Shopware unit and storefront test suites. This ensures the plugin stays
-compatible with current Shopware releases and continues to work with the
-storefront asset pipeline.
+Shopware unit and storefront test suites via `vendor/bin/phpunit`. Locally you
+can reproduce the workflow from within a Dockware container by running:
+
+```
+./vendor/bin/phpunit --configuration="custom/plugins/AstnerdevFontAwesome/phpunit.xml.dist"
+./vendor/bin/phpunit --configuration="vendor/shopware/platform/src/Storefront/Test/phpunit.xml"
+```
+
+This ensures the plugin stays compatible with current Shopware releases and
+continues to work with the storefront asset pipeline.
 
 ## Usage
 ```` html
