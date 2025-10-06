@@ -2,7 +2,7 @@
 
 namespace AstnerdevFontAwesome;
 
-use Shopware\\Core\\Framework\\Plugin;
+use Shopware\Core\Framework\Plugin;
 
 class AstnerdevFontAwesome extends Plugin
 {
