@@ -36,7 +36,7 @@ jobs:
 
       - name: Install composer dependencies with dev packages
         run: |
-          docker exec --user www-data dockware bash -lc 'cd /var/www/html && COMPOSER_MEMORY_LIMIT=-1 composer install --no-interaction --no-progress'
+          docker exec --user www-data dockware bash -lc 'cd /var/www/html && COMPOSER_MEMORY_LIMIT=-1 composer install --no-interaction --no-progress --dev'
 
       - name: Install and activate plugin
         run: |

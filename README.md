@@ -22,7 +22,7 @@ and storefront test suites via `vendor/bin/phpunit`. Locally you can reproduce
 the workflow from within a Dockware container by running:
 
 ```
-COMPOSER_MEMORY_LIMIT=-1 composer install --no-interaction --no-progress
+COMPOSER_MEMORY_LIMIT=-1 composer install --no-interaction --no-progress --dev
 ./vendor/bin/phpunit --configuration="custom/plugins/AstnerdevFontAwesome/phpunit.xml.dist"
 ./vendor/bin/phpunit --configuration="vendor/shopware/platform/src/Storefront/Test/phpunit.xml"
 ```
