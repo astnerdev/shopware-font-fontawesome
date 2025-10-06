@@ -38,6 +38,10 @@ jobs:
         run: |
           docker exec --user www-data dockware bash -lc 'cd /var/www/html && COMPOSER_MEMORY_LIMIT=-1 composer install --no-interaction --no-progress --dev'
 
+      - name: Install Shopware flex dev tools
+        run: |
+          docker exec --user www-data dockware bash -lc 'cd /var/www/html && COMPOSER_MEMORY_LIMIT=-1 composer require --no-interaction --no-progress --dev dev-tools'
+
       - name: Install and activate plugin
         run: |
           docker exec --user www-data dockware bash -lc 'cd /var/www/html && bin/console plugin:refresh && bin/console plugin:install --activate AstnerdevFontAwesome'
