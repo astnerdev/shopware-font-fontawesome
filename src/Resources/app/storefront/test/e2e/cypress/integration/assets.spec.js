@@ -1,5 +1,5 @@
 // / <reference types="Cypress" />
-describe('Plugin MastoxFontAwesome Tests', () => {
+describe('Plugin AstnerdevFontAwesome Tests', () => {
     beforeEach(() => {
         cy.loginViaApi()
             .then(() => {
@@ -21,20 +21,20 @@ describe('Plugin MastoxFontAwesome Tests', () => {
                     return Cypress.$(el).attr('href')
                 })
 
-                expect(hrefs.get()).to.contain(Cypress.config().baseUrl + '/bundles/mastoxfontawesome/assets/font/fa-brands-400.woff2')
-                expect(hrefs.get()).to.contain(Cypress.config().baseUrl + '/bundles/mastoxfontawesome/assets/font/fa-solid-900.woff2')
-                expect(hrefs.get()).to.contain(Cypress.config().baseUrl + '/bundles/mastoxfontawesome/assets/font/fa-regular-400.woff2')
+                expect(hrefs.get()).to.contain(Cypress.config().baseUrl + '/bundles/astnerdevfontawesome/assets/font/fa-brands-400.woff2')
+                expect(hrefs.get()).to.contain(Cypress.config().baseUrl + '/bundles/astnerdevfontawesome/assets/font/fa-solid-900.woff2')
+                expect(hrefs.get()).to.contain(Cypress.config().baseUrl + '/bundles/astnerdevfontawesome/assets/font/fa-regular-400.woff2')
             });
 
-        cy.request(Cypress.config().baseUrl + '/bundles/mastoxfontawesome/assets/font/fa-brands-400.woff2').then((response) => {
+        cy.request(Cypress.config().baseUrl + '/bundles/astnerdevfontawesome/assets/font/fa-brands-400.woff2').then((response) => {
             expect(response.status).to.eq(200)
         });
 
-        cy.request(Cypress.config().baseUrl + '/bundles/mastoxfontawesome/assets/font/fa-solid-900.woff2').then((response) => {
+        cy.request(Cypress.config().baseUrl + '/bundles/astnerdevfontawesome/assets/font/fa-solid-900.woff2').then((response)=> {
             expect(response.status).to.eq(200)
         });
 
-        cy.request(Cypress.config().baseUrl + '/bundles/mastoxfontawesome/assets/font/fa-regular-400.woff2').then((response) => {
+        cy.request(Cypress.config().baseUrl + '/bundles/astnerdevfontawesome/assets/font/fa-regular-400.woff2').then((response) => {
             expect(response.status).to.eq(200)
         });
 

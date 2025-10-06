@@ -1,13 +1,18 @@
 {% sw_extends '@Storefront/storefront/layout/meta.html.twig' %}
 {% block layout_head_stylesheet %}
     {{ parent() }}
-    <link rel="preload" href="{{ asset('bundles/mastoxfontawesome/assets/font/fa-solid-900.woff2') }}" as="font"
-          type="font/woff2"
-          crossorigin="">
-    <link rel="preload" href="{{ asset('bundles/mastoxfontawesome/assets/font/fa-brands-400.woff2') }}" as="font"
-          type="font/woff2"
-          crossorigin="">
-    <link rel="preload" href="{{ asset('bundles/mastoxfontawesome/assets/font/fa-regular-400.woff2') }}" as="font"
-          type="font/woff2"
-          crossorigin="">
+
+    {% set fonts = {
+        'fa-solid-900': 'font/woff2',
+        'fa-brands-400': 'font/woff2',
+        'fa-regular-400': 'font/woff2'
+    } %}
+
+    {% for fontName, mimeType in fonts %}
+        <link rel="preload"
+              href="{{ sw_asset('bundles/astnerdevfontawesome/assets/font/' ~ fontName ~ '.woff2') }}"
+              as="font"
+              type="{{ mimeType }}"
+              crossorigin>
+    {% endfor %}
 {% endblock %}

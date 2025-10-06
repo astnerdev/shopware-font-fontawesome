@@ -1,0 +1,63 @@
+name: CI
+
+on:
+  push:
+    branches: ["main", "master", "work"]
+  pull_request:
+
+jobs:
+  dockware-tests:
+    name: Run unit and storefront tests on Dockware
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Pull Dockware image
+        run: docker pull dockware/dev:6.7.2.2
+
+      - name: Start Dockware container
+        run: |
+          docker run -d \
+            --name dockware \
+            -e XDEBUG_ENABLED=0 \
+            dockware/dev:6.7.2.2
+
+      - name: Wait for Shopware to be ready
+        run: |
+          timeout 900 bash -c 'until docker exec dockware bash -lc "php -v" >/dev/null 2>&1; do sleep 10; done'
+
+      - name: Copy plugin into Shopware installation
+        run: |
+          docker exec dockware bash -lc "rm -rf /var/www/html/custom/plugins/AstnerdevFontAwesome && mkdir -p /var/www/html/custom/plugins/AstnerdevFontAwesome"
+          tar --exclude='.git' --exclude='.github' -cf - . | docker exec -i dockware tar -xf - -C /var/www/html/custom/plugins/AstnerdevFontAwesome
+
+      - name: Install composer dependencies with dev packages
+        run: |
+          docker exec --user www-data dockware bash -lc 'cd /var/www/html && COMPOSER_MEMORY_LIMIT=-1 composer install --no-interaction --no-progress --dev'
+
+      - name: Install Shopware flex dev tools
+        run: |
+          docker exec --user www-data dockware bash -lc 'cd /var/www/html && COMPOSER_MEMORY_LIMIT=-1 composer require --no-interaction --no-progress --dev dev-tools'
+
+      - name: Install and activate plugin
+        run: |
+          docker exec --user www-data dockware bash -lc 'cd /var/www/html && bin/console plugin:refresh && bin/console plugin:install --activate AstnerdevFontAwesome'
+
+      - name: Run unit tests
+        run: |
+          docker exec --user www-data dockware bash -lc 'cd /var/www/html && ./vendor/bin/phpunit --configuration="custom/plugins/AstnerdevFontAwesome/phpunit.xml.dist"'
+
+      - name: Run storefront tests
+        run: |
+          docker exec --user www-data dockware bash -lc 'cd /var/www/html && ./vendor/bin/phpunit --configuration="vendor/shopware/platform/src/Storefront/Test/phpunit.xml"'
+
+      - name: Show Dockware logs on failure
+        if: failure()
+        run: docker logs dockware
+
+      - name: Stop Dockware container
+        if: always()
+        run: docker rm -f dockware
