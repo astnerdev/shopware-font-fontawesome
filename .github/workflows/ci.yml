@@ -34,6 +34,10 @@ jobs:
           docker exec dockware bash -lc "rm -rf /var/www/html/custom/plugins/AstnerdevFontAwesome && mkdir -p /var/www/html/custom/plugins/AstnerdevFontAwesome"
           tar --exclude='.git' --exclude='.github' -cf - . | docker exec -i dockware tar -xf - -C /var/www/html/custom/plugins/AstnerdevFontAwesome
 
+      - name: Install composer dependencies with dev packages
+        run: |
+          docker exec --user www-data dockware bash -lc 'cd /var/www/html && COMPOSER_MEMORY_LIMIT=-1 composer install --no-interaction --no-progress'
+
       - name: Install and activate plugin
         run: |
           docker exec --user www-data dockware bash -lc 'cd /var/www/html && bin/console plugin:refresh && bin/console plugin:install --activate AstnerdevFontAwesome'
