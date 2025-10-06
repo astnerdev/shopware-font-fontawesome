@@ -27,7 +27,7 @@ jobs:
 
       - name: Wait for Shopware to be ready
         run: |
-          timeout 600 bash -c 'until docker exec dockware bash -lc "su - www-data -s /bin/bash -c \"php -v\"" >/dev/null 2>&1; do sleep 10; done'
+          timeout 900 bash -c 'until docker exec dockware bash -lc "php -v" >/dev/null 2>&1; do sleep 10; done'
 
       - name: Copy plugin into Shopware installation
         run: |
@@ -36,15 +36,15 @@ jobs:
 
       - name: Install and activate plugin
         run: |
-          docker exec dockware bash -lc "su - www-data -s /bin/bash -c 'cd /var/www/html && bin/console plugin:refresh && bin/console plugin:install --activate AstnerdevFontAwesome'"
+          docker exec --user www-data dockware bash -lc 'cd /var/www/html && bin/console plugin:refresh && bin/console plugin:install --activate AstnerdevFontAwesome'
 
       - name: Run unit tests
         run: |
-          docker exec dockware bash -lc "su - www-data -s /bin/bash -c 'cd /var/www/html && ./psh.phar unit'"
+          docker exec --user www-data dockware bash -lc 'cd /var/www/html && ./psh.phar unit'
 
       - name: Run storefront tests
         run: |
-          docker exec dockware bash -lc "su - www-data -s /bin/bash -c 'cd /var/www/html && ./psh.phar storefront:unit'"
+          docker exec --user www-data dockware bash -lc 'cd /var/www/html && ./psh.phar storefront:unit'
 
       - name: Show Dockware logs on failure
         if: failure()
