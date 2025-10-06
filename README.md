@@ -13,6 +13,14 @@ overrides the storefront meta template to preload the bundled Font Awesome
 font files. After activating the plugin, run the storefront build
 (`bin/console theme:compile`) so that the SCSS and fonts are available.
 
+## Continuous integration
+
+Every push and pull request triggers a GitHub Actions workflow that boots a
+Dockware Shopware 6.7.2.2 environment, installs the plugin, and executes the
+Shopware unit and storefront test suites. This ensures the plugin stays
+compatible with current Shopware releases and continues to work with the
+storefront asset pipeline.
+
 ## Usage
 ```` html
 <i class="fas fa-icons"></i>
